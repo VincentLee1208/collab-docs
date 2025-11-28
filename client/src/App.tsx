@@ -1,4 +1,5 @@
 import React from 'react';
+import Editor from './components/Editor';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
       >
 
         {/* Editor will go here */}
-        <div>Editor placeholder</div>
+        <Editor />
       </div>
     </div>
   );

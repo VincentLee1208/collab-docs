@@ -1,0 +1,7 @@
+.ProseMirror:focus {
+    outline: none !important;
+}
+
+.editor-content-wrapper {
+    outline: none !important;
+}

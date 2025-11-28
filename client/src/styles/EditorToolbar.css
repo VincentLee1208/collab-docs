@@ -1,0 +1,43 @@
+.editor-toolbar {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  background: white;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background-color: #d1d5db;
+  margin: 0 8px;
+}
+
+.toolbar-button {
+  padding: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.toolbar-button:hover {
+  background: #f3f4f6;
+}
+
+.toolbar-button.is-active {
+  background-color: #111827;
+}
+
+.toolbar-button.is-active .toolbar-icon {
+  color: white;
+}
+
+.toolbar-icon {
+  width: 18px;
+  height: 18px;
+  color: #374151;
+}
