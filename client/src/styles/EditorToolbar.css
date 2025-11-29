@@ -1,6 +1,6 @@
 .editor-toolbar {
   border-bottom: 1px solid #e5e7eb;
-  padding: 12px 24px;
+  padding: 12px 0px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -13,6 +13,48 @@
   height: 24px;
   background-color: #d1d5db;
   margin: 0 8px;
+}
+
+.font-size-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 8px;
+}
+
+.font-size-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 120ms ease;
+}
+
+.font-size-btn:hover {
+  background: #f3f4f6;
+}
+
+.font-size-input {
+  width: 40px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  text-align: center;
+  font-size: 14px;
+  padding: 0;
+  outline: none;
+}
+
+.font-size-input:focus {
+  border-color: #111827;
 }
 
 .toolbar-button {
