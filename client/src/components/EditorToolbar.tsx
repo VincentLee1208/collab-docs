@@ -10,6 +10,7 @@ interface EditorToolbarProps {
 const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
     const [, setUpdate] = useState(0);
     const [fontSize, setFontSize] = useState('16px');
+    const [inputValue, setInputValue] = useState('16');
 
     useEffect(() => {
         if (!editor) return;
@@ -19,9 +20,13 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
 
             const attrs = editor.getAttributes('textStyle');
             if(attrs.fontSize) {
-            setFontSize(attrs.fontSize);
+                setFontSize(attrs.fontSize);
+                setInputValue(
+                    String(parseInt(attrs.fontSize.replace('px', ''), 10))
+                );
             } else {
-            setFontSize('16px');
+                setFontSize('16px');
+                setInputValue('16');
             }
         };
 
@@ -34,7 +39,7 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
             editor.off('selectionUpdate', handler);
             editor.off('transaction', handler);
         };
-    }, [editor]);
+    }, [editor, fontSize]);
 
     const applyFormatting = (action: string) => {
         switch (action) {
@@ -67,27 +72,40 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
         }
     };
 
-    const changeFontSize = (delta: number) => {
-        let current = parseInt(fontSize.replace('px', ''), 10);
-        let next = Math.min(72, Math.max(8, current + delta));
-        const nextStr = `${next}px`;
+    const applyFontSize = (sizeNumber: number) => {
+        const clamped = Math.min(72, Math.max(8, sizeNumber));
+        const sizeStr = `${clamped}px`;
 
-        setFontSize(nextStr);
-        editor.chain().focus().setFontSize(nextStr).run();
+        setFontSize(sizeStr);
+        setInputValue(String(clamped));
+
+        editor.commands.setFontSize(sizeStr);
+    }
+
+    const changeFontSize = (delta: number) => {
+        const current = parseInt(fontSize.replace('px', ''), 10) || 16;
+        applyFontSize(current + delta);
     };
 
-    const handleFontSizeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const num = parseInt(value, 10);
+    const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    };
 
-        if(!isNaN(num)) {
-            const clamped = Math.min(72, Math.max(8, num));
-            const sizeStr = `${clamped}px`;
-
-            setFontSize(sizeStr);
-            editor.chain().focus().setFontSize(sizeStr).run();
+    const handleFontSizeKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            const num = parseInt(inputValue, 10);
+            if (!isNaN(num)) {
+                applyFontSize(num);
+            } else {
+                // invalid input: reset to last applied value
+                setInputValue(String(parseInt(fontSize.replace('px', ''), 10) || 16));
+            }
         }
     };
+
+    // const handleFontSizeBlur = () => {
+    //     setInputValue(String(parseInt(fontSize.replace('px', ''), 10) || 16));
+    // };
 
     return (
         <div className="editor-toolbar">
@@ -96,7 +114,7 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
                 <button
                     type="button"
                     className="font-size-btn"
-                    onClick={() => changeFontSize(-2)}
+                    onClick={() => changeFontSize(-1)}
                 >
                     -    
                 </button> 
@@ -104,14 +122,16 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
                 <input
                     type="text"
                     className="font-size-input"
-                    value={parseInt(fontSize, 10)}
-                    onChange={handleFontSizeInput}
+                    value={inputValue}
+                    onChange={handleFontSizeChange}
+                    onKeyDown={handleFontSizeKeyDown}
+                    // onBlur={handleFontSizeBlur}
                 />
 
                 <button
                     type="button"
                     className="font-size-btn"
-                    onClick={() => changeFontSize(2)}
+                    onClick={() => changeFontSize(1)}
                 >
                     +
                 </button>
