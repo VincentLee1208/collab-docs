@@ -5,3 +5,10 @@
 .editor-content-wrapper {
     outline: none !important;
 }
+
+.editor-title {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 16px 0px;
+  border-bottom: 1px solid #e5e7eb;
+}

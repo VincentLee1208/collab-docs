@@ -7,7 +7,7 @@ interface EditorToolbarProps {
   editor: Editor;
 }
 
-const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
+export default function EditorToolbar({ editor }: EditorToolbarProps) {
     const [, setUpdate] = useState(0);
     const [fontSize, setFontSize] = useState('16px');
     const [inputValue, setInputValue] = useState('16');
@@ -103,13 +103,10 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
         }
     };
 
-    // const handleFontSizeBlur = () => {
-    //     setInputValue(String(parseInt(fontSize.replace('px', ''), 10) || 16));
-    // };
-
     return (
         <div className="editor-toolbar">
-            
+
+            {/* Font size controls */}
             <div className="font-size-group">
                 <button
                     type="button"
@@ -125,7 +122,6 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
                     value={inputValue}
                     onChange={handleFontSizeChange}
                     onKeyDown={handleFontSizeKeyDown}
-                    // onBlur={handleFontSizeBlur}
                 />
 
                 <button
@@ -136,6 +132,8 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
                     +
                 </button>
             </div>
+
+            <div className="toolbar-divider" />
 
             {/* Bold */}
             <button
@@ -223,5 +221,3 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ editor }) => {
         </div>
     );
 };
-
-export default EditorToolbar;
