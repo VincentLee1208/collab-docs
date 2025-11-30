@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Editor from './components/Editor';
+import EditorSideBar from './components/EditorSideBar';
 import type { Doc } from './types/Document';
 
 import './styles/App.css';
@@ -38,9 +39,21 @@ export default function App() {
   return (
     <div className="App">
       <div className="app-container">
-        <Editor 
-          document = {activeDoc}
-        />
+        {/* Sidebar */}
+        <div className="app-sidebar">
+          <EditorSideBar
+            documents={docs}
+            selectedDocId={activeDocId}
+            onSelectDoc={setActiveDocId}
+          />
+        </div>
+
+        {/* Editor */}
+        <div className="app-editor">
+          <Editor
+            document={activeDoc}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,18 @@
 .ProseMirror:focus {
-    outline: none !important;
+  outline: none !important;
 }
 
 .editor-content-wrapper {
-    outline: none !important;
+  outline: none !important;
+  min-height: 600px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  padding: 16px 20px;
+}
+
+.editor-root {
+  width: 100%;
+  padding: 0 12px;
 }
 
 .editor-title {

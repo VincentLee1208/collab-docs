@@ -12,7 +12,7 @@ export default function Editor({ document }: { document: Doc }) {
     const editor = useEditor({
         extensions: [StarterKit, Underline, TextAlign.configure({ types: ['heading', 'paragraph'] }), TextStyle, FontSize],
         content: document.content,
-    });
+    }, [document.id]);
 
     if (!editor) return null;
 

@@ -1,15 +1,37 @@
 .App {
   min-height: 100vh;
+  background-color: #f3f4f6;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px;
+  padding: 32px;
+  box-sizing: border-box;
 }
 
 .app-container {
-  width: min(900px, 100%);
-  background: white;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  padding: 24px 32px;
+  overflow: hidden;
+}
+
+.app-sidebar {
+  width: 260px;
+  border-right: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-editor {
+  flex: 1;
+  padding: 24px 0px;
+  background-color: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
 }
